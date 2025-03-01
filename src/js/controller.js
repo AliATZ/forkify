@@ -1,19 +1,15 @@
 import * as model from "./model.js";
 import recipeView from "./views/recipeView.js";
+import searchView from "./views/searchView";
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime'
-const recipeContainer = document.querySelector('.recipe');
+import {state} from "./model.js";
 
 
 
 // NEW API URL (instead of the one shown in the video)
 // https://forkify-api.jonas.io
-
-///////////////////////////////////////
-const ali = function (){
-
-}
 
 
 async function controlRecipe() {
@@ -27,17 +23,25 @@ async function controlRecipe() {
     // const res = await fetch('https://forkify-api.jonas.io/api/v2/recipes/5ed6604591c37cdc054bc886')
     //rendering
 
-    recipeView.render(model.state.recipe)
+    recipeView.render(model.state.recipes)
   }catch (err){
     console.error(err)
     recipeView.renderError();
   }
 }
+async function controlSearchResults(){
+  try {
+    const query = searchView.getQuery()
+    if (!query) return;
+    await model.loadSearchResults(query)
+  }catch (error) {
+    console.error(error)
+  }
+}
 
 // showRecipe()
-['hashchange', 'load'].forEach(ev => {
-  window.addEventListener(ev , controlRecipe)
-})
-//
-// window.addEventListener('hashchange', showRecipe)
-// window.addEventListener('load',showRecipe)
+function init(){
+  recipeView.addHandlerRender(controlRecipe)
+  searchView.addHandlerSearch(controlSearchResults)
+}
+init()

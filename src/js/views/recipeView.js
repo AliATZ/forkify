@@ -26,6 +26,12 @@ export class RecipeView {
         this.#clear();
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);
     }
+
+    addHandlerRender(handler){
+        ['hashchange', 'load'].forEach(ev => {
+            window.addEventListener(ev , handler)
+        })
+    }
     renderError(message = this.#errorMessage){
         const markup = `<div class="error">
             <div>
