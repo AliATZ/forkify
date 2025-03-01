@@ -5,13 +5,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime'
 const recipeContainer = document.querySelector('.recipe');
 
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
+
 
 // NEW API URL (instead of the one shown in the video)
 // https://forkify-api.jonas.io
@@ -28,7 +22,6 @@ async function controlRecipe() {
     //loading
     await model.loadRecipe(id)
 
-    // const {recipe} = model.state
     // const res = await fetch('https://forkify-api.jonas.io/api/v2/recipes/5ed6604591c37cdc054bc886')
     //rendering
 
