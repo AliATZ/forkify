@@ -2,6 +2,8 @@ import icons from 'url:../../img/icons.svg'
 export class RecipeView {
     #parentElement =document.querySelector('.recipe');
     #data
+    #errorMessage = 'could not load recipe';
+    #message =''
 
     render(data){
         this.#data = data;
@@ -21,9 +23,35 @@ export class RecipeView {
           </svg>
         </div>`
 
-        this.#parentElement.innerHTML = '';
+        this.#clear();
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);
     }
+    renderError(message = this.#errorMessage){
+        const markup = `<div class="error">
+            <div>
+              <svg>
+                <use href="${icons}#icon-alert-triangle"></use>
+              </svg>
+            </div>
+            <p>No recipes found for your query. Please try again!</p>
+          </div>`
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+    renderMessage (message = this.#message){
+        const markup = ` <div class="recipe">
+        <div class="message">
+          <div>
+            <svg>
+              <use href="src/img/icons.svg#icon-smile"></use>
+            </svg>
+          </div>
+          <p>${message} </p>
+        </div>`
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+
 
     #generateMarkup(){
         return `<figure class="recipe__fig">

@@ -11,7 +11,9 @@ const recipeContainer = document.querySelector('.recipe');
 // https://forkify-api.jonas.io
 
 ///////////////////////////////////////
+const ali = function (){
 
+}
 
 
 async function controlRecipe() {
@@ -27,7 +29,8 @@ async function controlRecipe() {
 
     recipeView.render(model.state.recipe)
   }catch (err){
-    alert(err)
+    console.error(err)
+    recipeView.renderError();
   }
 }
 
