@@ -40,7 +40,8 @@ async function controlSearchResults(){
     const query = searchView.getQuery()
     if (!query) return;
     await model.loadSearchResults(query)
-    resultsView.render(model.state.search.results)
+    // resultsView.render(model.state.search.results)
+    resultsView.render(model.getResultsPage(1))
   }catch (error) {
     console.error(error)
   }
