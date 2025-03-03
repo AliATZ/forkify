@@ -23,6 +23,9 @@ async function controlRecipe() {
     if (!id) return;
     recipeView.renderSpinner()
     //loading
+
+    resultsView.update(model.getResultsPage())
+
     await model.loadRecipe(id)
 
     // const res = await fetch('https://forkify-api.jonas.io/api/v2/recipes/5ed6604591c37cdc054bc886')
@@ -60,6 +63,7 @@ function controlServings(servings){
   model.updateServings(servings)
 
   recipeView.render(model.state.recipes)
+  recipeView.update(model.state.recipes)
 }
 
 // showRecipe()
