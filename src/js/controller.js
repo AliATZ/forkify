@@ -3,14 +3,15 @@ import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView  from "./views/resultsView.js";
 import paginationView from "./views/paginationView.js";
+import bookmarks  from "./views/bookmarks.js";
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime'
 import {state} from "./model.js";
 
-if (module.hot) {
-  module.hot.accept()
-}
+// if (module.hot) {
+//   module.hot.accept()
+// }
 
 // NEW API URL (instead of the one shown in the video)
 // https://forkify-api.jonas.io
@@ -25,6 +26,7 @@ async function controlRecipe() {
     //loading
 
     resultsView.update(model.getResultsPage())
+    bookmarks.update(model.state.bookmark)
 
     await model.loadRecipe(id)
 
@@ -74,6 +76,8 @@ function controlAddBookmark(){
     model.removeBookmark(model.state.recipes.id)
   }
   recipeView.update(model.state.recipes)
+
+  bookmarks.render(model.state.bookmark)
 }
 
 // showRecipe()
