@@ -80,8 +80,13 @@ function controlAddBookmark(){
   bookmarks.render(model.state.bookmark)
 }
 
+function controlBookmarks(){
+    bookmarks.render(state.bookmark)
+}
+
 // showRecipe()
 function init(){
+  bookmarks.addHandlerRender(controlBookmarks)
   recipeView.addHandlerRender(controlRecipe)
   recipeView.addHandlerServings(controlServings)
   recipeView.addHandlerAddBookmark(controlAddBookmark)

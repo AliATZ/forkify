@@ -7,6 +7,11 @@ export class Bookmarks extends View {
     errorMessage = 'no book marks yet';
     message =''
 
+    addHandlerRender(handler){
+        window.addEventListener('load',handler)
+
+    }
+
     generateMarkup(){
         return this.data.map(result => previewView.render(result, false)).join('')
 
